@@ -27,7 +27,7 @@ public class UserController {
     public User create(@Valid @RequestBody User user) {
         log.info("Создание нового пользователя: {}", user);
         if (user.getName() == null || user.getName().isBlank()) {
-            log.info("Имя не указано. Используем логин в качестве имении: {}", user.getLogin());
+            log.info("Имя не указано. Используем логин в качестве имени: {}", user.getLogin());
             user.setName(user.getLogin());
         }
         user.setId(identify());
