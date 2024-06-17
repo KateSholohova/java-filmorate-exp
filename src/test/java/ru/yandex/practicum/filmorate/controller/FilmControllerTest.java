@@ -35,7 +35,7 @@ class FilmControllerTest {
         film.setName(" ");
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         assertFalse(violations.isEmpty());
-        film.setName("name");
+        film.setName("names");
         film.setDescription("ааааааааааааааааааааааааааааааааgfffffffffffffffffffffffffffffffffffffffааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа");
         violations = validator.validate(film);
         assertFalse(violations.isEmpty());
