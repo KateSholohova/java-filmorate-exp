@@ -6,6 +6,7 @@ import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
 
 import java.util.*;
 
@@ -13,12 +14,13 @@ import java.util.*;
 @RequiredArgsConstructor
 public class FilmService {
     private final InMemoryFilmStorage inMemoryFilmStorage;
+    private final InMemoryUserStorage inMemoryUserStorage;
 
     public Film addLike(long id, long userId) {
         if (inMemoryFilmStorage.findById(id) == null) {
             throw new NotFoundException("Нет фильма с id: " + id);
         }
-        if (inMemoryFilmStorage.findById(userId) == null) {
+        if (inMemoryUserStorage.findById(userId) == null) {
             throw new NotFoundException("Нет пользователя с id: " + userId);
         }
         Film film = inMemoryFilmStorage.findById(id);
@@ -34,7 +36,7 @@ public class FilmService {
         if (inMemoryFilmStorage.findById(id) == null) {
             throw new NotFoundException("Нет фильма с id: " + id);
         }
-        if (inMemoryFilmStorage.findById(userId) == null) {
+        if (inMemoryUserStorage.findById(userId) == null) {
             throw new NotFoundException("Нет пользователя с id: " + userId);
         }
         Film film = inMemoryFilmStorage.findById(id);

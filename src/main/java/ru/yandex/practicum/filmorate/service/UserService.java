@@ -45,6 +45,9 @@ public class UserService {
             throw new NotFoundException("Нет пользователя с id: " + friendId);
         }
         User user = inMemoryUserStorage.findById(id);
+        if (!user.getFriends().contains(friendId)) {
+            throw new NotFoundException("Нет пользователя с id у вас в друзьях: " + id);
+        }
         user.getFriends().remove(friendId);
         User friend = inMemoryUserStorage.findById(friendId);
         friend.getFriends().remove(id);
@@ -74,8 +77,14 @@ public class UserService {
     }
 
     public List<User> allFriends(long id) {
+        if (inMemoryUserStorage.findById(id) == null) {
+            throw new NotFoundException("Нет пользователя с id: " + id);
+        }
         User user = inMemoryUserStorage.findById(id);
         List<User> allFriends = new ArrayList<>();
+        if (user.getFriends() == null) {
+            return allFriends;
+        }
         for (Long firstId : user.getFriends()) {
             allFriends.add(inMemoryUserStorage.findById(firstId));
         }
