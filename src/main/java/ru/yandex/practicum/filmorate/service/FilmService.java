@@ -3,7 +3,6 @@ package ru.yandex.practicum.filmorate.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
-import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
 import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
@@ -66,9 +65,6 @@ public class FilmService {
 
     public List<Film> getPopular(int count) {
         ArrayList<Film> films = new ArrayList<>(inMemoryFilmStorage.getFilms().values());
-        if (count > films.size()) {
-            throw new ValidationException("Фильмов всего " + films.size());
-        }
         Comparator<Film> filmComparator = new Comparator<Film>() {
             public int compare(Film film1, Film film2) {
                 System.out.println(film1.getId());
