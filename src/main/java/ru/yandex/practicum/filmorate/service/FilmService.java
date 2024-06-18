@@ -81,16 +81,17 @@ public class FilmService {
         Collections.sort(films, filmComparator);
         List<Film> popularFilms = new ArrayList<>();
         if (count != 0) {
-            popularFilms = (films.subList(0, count));
+            if (count > films.size()) {
+                popularFilms = films;
+            } else {
+                popularFilms = (films.subList(0, count));
+            }
         } else if (count == 0 && films.size() < 10) {
             popularFilms = (films);
         } else if (count == 0 && films.size() >= 10) {
             popularFilms = (films.subList(0, 10));
-        } else if (count > films.size()) {
-            popularFilms = films;
         }
         return popularFilms;
-
     }
 
 

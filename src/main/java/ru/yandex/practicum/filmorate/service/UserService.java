@@ -45,8 +45,11 @@ public class UserService {
             throw new NotFoundException("Нет пользователя с id: " + friendId);
         }
         User user = inMemoryUserStorage.findById(id);
+        if (user.getFriends() == null) {
+            return new HashSet<>();
+        }
         if (!user.getFriends().contains(friendId)) {
-            return user.getFriends();
+            throw new NotFoundException("Нет пользователя с id у вас в друзьях: " + id);
         }
         user.getFriends().remove(friendId);
         User friend = inMemoryUserStorage.findById(friendId);
