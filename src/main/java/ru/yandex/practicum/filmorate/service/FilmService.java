@@ -90,7 +90,7 @@ public class FilmService {
             popularFilms = (films);
         } else if (count == 0 && films.size() >= 10) {
             popularFilms = (films.subList(0, 10));
-        } else if (count > films.size()){
+        } else if (count > films.size()) {
             popularFilms = films;
         }
         return popularFilms;
