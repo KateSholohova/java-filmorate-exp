@@ -14,11 +14,9 @@ public class User {
     String name;
     Long id;
     Set<Long> friends;
-    @NotNull
     @NotBlank
     @Email
     String email;
-    @NotNull
     @NotBlank
     String login;
     @Past
